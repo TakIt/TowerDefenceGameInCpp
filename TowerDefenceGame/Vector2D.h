@@ -3,7 +3,7 @@
 #include <math.h>
 
 /// <summary>
-/// •½–ÊÀ•W‚ğˆµ‚¤
+/// Plane coordinates
 /// </summary>
 class Vector2D final {
 public:

@@ -2,6 +2,10 @@
 
 #include "Vector2D.h"
 
+
+/// <summary>
+/// Enemy prototype
+/// </summary>
 class NormalEnemy {
 public:
 	NormalEnemy();

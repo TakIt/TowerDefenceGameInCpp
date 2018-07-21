@@ -10,9 +10,9 @@ public:
 	virtual void attack();
 
 private:
-	double attackpower;		// UŒ‚—Í
-	double firerate;		// UŒ‚‘¬“x
-	double attackrange;		// UŒ‚”ÍˆÍ
+	double attackpower;
+	double firerate;
+	double attackrange;
 
-	Vector2D position;		// ‰æ–Êã‚ÌˆÊ’u
+	Vector2D position;
 };
