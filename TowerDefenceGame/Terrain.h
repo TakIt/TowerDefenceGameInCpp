@@ -23,5 +23,5 @@ public:
 
 
 private:
-
+	// MAY : add StatusBonus for placed turret
 };

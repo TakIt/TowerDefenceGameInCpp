@@ -6,10 +6,11 @@
 /// <summary>
 /// Enemy prototype
 /// </summary>
-class NormalEnemy {
+class EnemyBase {
 public:
-	NormalEnemy();
-	virtual ~NormalEnemy();
+	EnemyBase();
+	EnemyBase(double hitpoint, double movespeed, double attackpower);
+	virtual ~EnemyBase();
 
 	virtual void moveTo(const Vector2D &target);
 	bool isAlive() const { return hitpoint > 0; }
@@ -18,6 +19,6 @@ public:
 protected:
 	double hitpoint;
 	double movespeed;
-	int attackpower;
+	double attackpower;
 	Vector2D position;
 };
