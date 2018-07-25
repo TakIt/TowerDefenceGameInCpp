@@ -131,6 +131,7 @@
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Terrain.h" />
     <ClInclude Include="Turret.h" />
+    <ClInclude Include="TurretBarrel.h" />
     <ClInclude Include="Vector2D.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

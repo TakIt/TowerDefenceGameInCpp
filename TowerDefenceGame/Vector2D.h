@@ -23,6 +23,7 @@ public:
 	void setY(double y) { this->y = y; }
 
 	double getAbs() const { return sqrt(pow(x, 2) + pow(y, 2)); }
+	double getAbsTo(const Vector2D &target) const { return sqrt(pow(this->x - target.x, 2) + pow(this->y - target.y, 2)); }
 	double getAngleTo(const Vector2D &target) const {
 		if (target.x == 0 && target.y == 0) return 0;
 		return atan2(target.y, target.x);

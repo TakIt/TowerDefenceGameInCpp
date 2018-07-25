@@ -2,29 +2,36 @@
 
 #include "Vector2D.h"
 #include "Enemy.h"
+#include "TurretBarrel.h"
+
+#include <vector>
 #include <string>
 
 class TurretBase {
 public:
-	TurretBase() {}
+	TurretBase(double damage, double firerate, double range){
+		this->damage = damage;
+		this->firerate = firerate;
+		this->range = range;
+	}
 	virtual ~TurretBase() {}
 
-	virtual void attack(EnemyBase &target) = 0;
+	virtual void attack(std::vector<EnemyBase> &targetlist) const = 0;
 	virtual void construct() = 0;
 	bool canConstruct(long long resource);
 	virtual void upgrade() = 0;
+	bool canUpgrade(long long resource);
 	virtual void destroy() = 0;
 
 	std::string getName() const { return this->name; }
-	double getAttackPower() const { return this->attackpower; }
+	double getDamage() const { return this->damage; }
 	double getFireRate() const { return this->firerate; }
-	double getAttackRange() const { this->attackrange; }
+	double getRange() const { this->range; }
 	Vector2D getPosition() const { this->position; }
 
-
-	void setAttackPower(double attackpower) { this->attackpower = attackpower; }
+	void setAttackPower(double damage) { this->damage = damage; }
 	void setFireRate(double firerate) { this->firerate = firerate; }
-	void setAttackRange(double attackrange) { this->attackrange = attackrange; }
+	void setAttackRange(double range) { this->range = range; }
 
 
 protected:
@@ -33,29 +40,91 @@ protected:
 		FarthestTurret,
 		ClosestBase,
 		FarthestBase,
+		LowestHealth,
+		HighestHealth,
 
 		Random,
 	}eTargetPriority;
 
 	std::string name;
-	int cost;
+	int constructcost;
+	int upgradecost;
 	int costspent;
-	double attackpower;
+	double damage;
 	double firerate;
-	double attackrange;
+	double range;
 	Vector2D position;
 	eTargetPriority targetpriority;
+	TurretBarrel turretbarrel;
+
 	int texturehandle;
 
 	
 };
 
-class LaserTurret : public TurretBase {
+/// <summary>
+/// BasicTurret Class.
+/// </summary>
+class BasicTurret : public TurretBase {
 public:
-	LaserTurret();
-	~LaserTurret();
+	BasicTurret(double damage, double firerate, double range) : TurretBase(damage, firerate, range) {}
+	~BasicTurret() {}
+
+	void attack(std::vector<EnemyBase> &targetlist) const override;
 
 
-private:
+protected:
+
+};
+
+/// <summary>
+/// Turret that takes splash damage but range is restricted.
+/// </summary>
+class MortarTurret : public TurretBase {
+public:
+	MortarTurret(double damage, double firerate, double maxrange, double splashdamage, double splashrange, double minrange) : TurretBase(damage, firerate, maxrange) {
+		this->splashdamage = splashdamage;
+		this->splashrange = splashrange;
+		this->minrange = minrange;
+	}
+	~MortarTurret() {}
+
+	void attack(std::vector<EnemyBase> &targetlist) const override;
+
+protected:
+	double splashdamage;
+	double splashrange;
+	double minrange;
+};
+
+/// <summary>
+/// Turret that takes damage to all enemies in range.
+/// </summary>
+class BlastTurret : public TurretBase {
+public:
+	BlastTurret(double damage, double firerate, double range) : TurretBase(damage, firerate, range) {
+		
+	}
+	~BlastTurret() {}
+
+	void attack(std::vector<EnemyBase> &targetlist) const override;
+
+protected:
+	
+};
+
+/// <summary>
+/// Turret that takes damage to enemy over time
+/// </summary>
+class DotTurret : public TurretBase {
+public:
+	DotTurret(double damage, double firerate, double range, double effectvalue) : TurretBase(damage, firerate, range) {
+		this->effectvalue = effectvalue;
+	}
+
+	void attack(std::vector<EnemyBase> &targetlist) const override;
+
+protected:
+	double effectvalue;
 
 };
