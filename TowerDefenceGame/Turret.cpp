@@ -1,6 +1,5 @@
 #include "Turret.h"
 
-#include <algorithm>
 #include <vector>
 
 bool TurretBase::canConstruct(long long resource) {
@@ -24,7 +23,7 @@ void BasicTurret::attack(std::vector<EnemyBase> &targetlist) const {
 			mindistance = this->getPosition().getAbsTo(targetlist[0].getPosition());
 		}
 
-		for (int i = 0; i < targetlist.size; i++) {
+		for (int i = 0; i < (signed)targetlist.size(); i++) {
 			// out of range
 			if (this->range < targetlist[i].getPosition().getAbsTo(this->position)) {
 				continue;
@@ -44,7 +43,7 @@ void BasicTurret::attack(std::vector<EnemyBase> &targetlist) const {
 			maxdistance = this->getPosition().getAbsTo(targetlist[0].getPosition());
 		}
 
-		for (int i = 0; i < targetlist.size; i++) {
+		for (int i = 0; i < (signed)targetlist.size(); i++) {
 			// out of range
 			if (this->range < targetlist[i].getPosition().getAbsTo(this->position)) {
 				continue;

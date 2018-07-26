@@ -2,32 +2,30 @@
 
 #include "Vector2D.h"
 
-
-/// <summary>
-/// Enemy prototype
-/// </summary>
 class EnemyBase {
 public:
-	EnemyBase() {}
-	EnemyBase(double hitpoint, double movespeed, double attackpower) {
+	EnemyBase(long long hitpoint, int movespeed, long attackpower, long long resourcereward) {
 		this->hitpoint = hitpoint;
 		this->movespeed = movespeed;
 		this->attackpower = attackpower;
+		this->resourcereward = resourcereward;
+		this->movecount = 0;
 	}
-	virtual ~EnemyBase() {}
+	virtual ~EnemyBase() = 0;
 
-	virtual void moveTo(const Vector2D &target);
+	virtual void move() = 0;
 	bool isAlive() const { return hitpoint > 0; }
 
-
-	double getHitPoint() { return this->hitpoint; }
+	long long getHitPoint() { return this->hitpoint; }
 	Vector2D getPosition() const { return this->position; }
 
 	void setHitPoint(double hitpoint) { this->hitpoint = hitpoint; }
 
 protected:
-	double hitpoint;
+	long long hitpoint;
 	double movespeed;
-	double attackpower;
+	long attackpower;
+	long long resourcereward;
 	Vector2D position;
+	double movecount;
 };

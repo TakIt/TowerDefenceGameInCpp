@@ -14,7 +14,7 @@ public:
 		this->firerate = firerate;
 		this->range = range;
 	}
-	virtual ~TurretBase() {}
+	virtual ~TurretBase() = 0;
 
 	virtual void attack(std::vector<EnemyBase> &targetlist) const = 0;
 	virtual void construct() = 0;
@@ -27,7 +27,7 @@ public:
 	double getDamage() const { return this->damage; }
 	double getFireRate() const { return this->firerate; }
 	double getRange() const { this->range; }
-	Vector2D getPosition() const { this->position; }
+	Vector2D getPosition() const { return this->position; }
 
 	void setAttackPower(double damage) { this->damage = damage; }
 	void setFireRate(double firerate) { this->firerate = firerate; }

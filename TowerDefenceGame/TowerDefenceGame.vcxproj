@@ -129,7 +129,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Enemy.h" />
+    <ClInclude Include="Game.h" />
+    <ClInclude Include="GameManager.h" />
+    <ClInclude Include="Scene.h" />
+    <ClInclude Include="ISceneChanger.h" />
+    <ClInclude Include="Task.h" />
     <ClInclude Include="Terrain.h" />
+    <ClInclude Include="Title.h" />
     <ClInclude Include="Turret.h" />
     <ClInclude Include="TurretBarrel.h" />
     <ClInclude Include="Vector2D.h" />
