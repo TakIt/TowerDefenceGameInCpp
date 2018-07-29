@@ -9,14 +9,14 @@
 
 class TurretBase {
 public:
-	TurretBase(double damage, double firerate, double range){
+	TurretBase(double damage, double firerate, double range) {
 		this->damage = damage;
 		this->firerate = firerate;
 		this->range = range;
 	}
 	virtual ~TurretBase() = 0;
 
-	virtual void attack(std::vector<EnemyBase> &targetlist) const = 0;
+	virtual void attack(std::vector<EnemyBase> &targetlist) = 0;
 	virtual void construct() = 0;
 	bool canConstruct(long long resource);
 	virtual void upgrade() = 0;
@@ -70,7 +70,7 @@ public:
 	BasicTurret(double damage, double firerate, double range) : TurretBase(damage, firerate, range) {}
 	~BasicTurret() {}
 
-	void attack(std::vector<EnemyBase> &targetlist) const override;
+	void attack(std::vector<EnemyBase> &targetlist) override;
 
 
 protected:
@@ -89,7 +89,7 @@ public:
 	}
 	~MortarTurret() {}
 
-	void attack(std::vector<EnemyBase> &targetlist) const override;
+	void attack(std::vector<EnemyBase> &targetlist) override;
 
 protected:
 	double splashdamage;
@@ -107,7 +107,7 @@ public:
 	}
 	~BlastTurret() {}
 
-	void attack(std::vector<EnemyBase> &targetlist) const override;
+	void attack(std::vector<EnemyBase> &targetlist) override;
 
 protected:
 	
@@ -122,7 +122,7 @@ public:
 		this->effectvalue = effectvalue;
 	}
 
-	void attack(std::vector<EnemyBase> &targetlist) const override;
+	void attack(std::vector<EnemyBase> &targetlist) override;
 
 protected:
 	double effectvalue;

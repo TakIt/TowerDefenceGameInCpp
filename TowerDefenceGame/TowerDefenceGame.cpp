@@ -12,7 +12,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	SetGraphMode(1024, 768, 32);
 	SetWindowSize(1024, 768);
 	
-	ChangeWindowMode(TRUE), DxLib_Init(), SetDrawScreen(DX_SCREEN_BACK);
+	ChangeWindowMode(TRUE); 
+	SetDrawScreen(DX_SCREEN_BACK);
 	DxLib_Init();
 
 	GameManager gm;

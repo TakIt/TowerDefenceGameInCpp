@@ -8,8 +8,8 @@ public:
 	BaseScene(ISceneChanger* changer);
 	virtual ~BaseScene() {}
 	virtual void Initialize() override {}
-	virtual void Finalize() override;
-	virtual void Update() override {}
+	virtual void Finalize() override {}
+	virtual void Update() override;
 	virtual void Draw() override;
 
 protected:
@@ -18,4 +18,11 @@ protected:
 
 BaseScene::BaseScene(ISceneChanger *changer) {
 	this->mSceneChanger = changer;
+}
+
+void BaseScene::Update() {
+
+}
+void BaseScene::Draw() {
+
 }

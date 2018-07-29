@@ -10,6 +10,8 @@
 #include <vector>
 #include <list>
 
+
+
 class Game : public BaseScene {
 public:
 	Game(ISceneChanger *changer);
@@ -23,7 +25,7 @@ public:
 private:
 	std::vector<TurretBase> vturret;
 	std::vector<EnemyBase> venemy;
-	std::list<Vector2D> pathlist;
+	std::vector<Vector2D> vpath;
 
 };
 
@@ -36,11 +38,11 @@ void Game::Initialize() {
 }
 
 void Game::Update() {
-	for (int i = 0; i < vturret.size(); i++) {
-		vturret[i].attack(venemy);
+	for (auto i = vturret.begin();i != vturret.end(); ++i) {
+		i->attack(venemy);
 	}
-	for (int i = 0; i < venemy.size(); i++) {
-		venemy[i].moveTo();
+	for (auto i = venemy.begin(); i != venemy.end(); ++i) {
+		i->move(vpath);
 	}
 }
 

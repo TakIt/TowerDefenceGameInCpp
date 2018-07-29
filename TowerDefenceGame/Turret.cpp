@@ -9,10 +9,10 @@ bool TurretBase::canUpgrade(long long resource) {
 	return resource >= upgradecost;
 }
 
-void BasicTurret::attack(std::vector<EnemyBase> &targetlist) const {
+void BasicTurret::attack(std::vector<EnemyBase> &targetlist) {
 	int targetindex;
 
-	// there is no enemy in range
+	// there is no enemy in stage
 	if (targetlist.size() == 0)return;
 
 	switch (this->targetpriority) {
@@ -26,6 +26,8 @@ void BasicTurret::attack(std::vector<EnemyBase> &targetlist) const {
 		for (int i = 0; i < (signed)targetlist.size(); i++) {
 			// out of range
 			if (this->range < targetlist[i].getPosition().getAbsTo(this->position)) {
+				// there is no enemy in range
+				if (i == (signed)targetlist.size() - 1)return;
 				continue;
 			}
 			// farther than target
@@ -46,6 +48,8 @@ void BasicTurret::attack(std::vector<EnemyBase> &targetlist) const {
 		for (int i = 0; i < (signed)targetlist.size(); i++) {
 			// out of range
 			if (this->range < targetlist[i].getPosition().getAbsTo(this->position)) {
+				// there is no enemy in range
+				if (i == (signed)targetlist.size() - 1)return;
 				continue;
 			}
 			// closer than target
@@ -68,8 +72,11 @@ void BasicTurret::attack(std::vector<EnemyBase> &targetlist) const {
 		break;
 	}
 
-	// attack
-	targetlist[targetindex].setHitPoint(targetlist[targetindex].getHitPoint() - this->damage);
+	/* attack */
+	// set barrel angle to target
+	this->turretbarrel.setAngle(this->getPosition().getAngleTo(targetlist[targetindex].getPosition()));
+	// take damage
+	targetlist[targetindex].setHitpoint(targetlist[targetindex].getHitpoint() - this->damage);
 
 }
 
