@@ -123,6 +123,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Terrain.cpp" />
     <ClCompile Include="TowerDefenceGame.cpp" />
     <ClCompile Include="Turret.cpp" />

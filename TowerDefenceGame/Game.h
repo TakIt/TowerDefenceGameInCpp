@@ -8,9 +8,6 @@
 #include "Terrain.h"
 
 #include <vector>
-#include <list>
-
-
 
 class Game : public BaseScene {
 public:
@@ -23,9 +20,15 @@ public:
 	void Finalize() override;
 
 private:
+	// turret factory
+	// enemy factory
+
+
+	/*
 	std::vector<TurretBase> vturret;
 	std::vector<EnemyBase> venemy;
 	std::vector<Vector2D> vpath;
+	*/
 
 };
 
@@ -38,12 +41,7 @@ void Game::Initialize() {
 }
 
 void Game::Update() {
-	for (auto i = vturret.begin();i != vturret.end(); ++i) {
-		i->attack(venemy);
-	}
-	for (auto i = venemy.begin(); i != venemy.end(); ++i) {
-		i->move(vpath);
-	}
+
 }
 
 void Game::Draw() {

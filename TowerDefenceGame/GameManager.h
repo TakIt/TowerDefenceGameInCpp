@@ -5,6 +5,7 @@
 #include "Task.h"
 
 #include "Title.h"
+#include "Game.h"
 
 #include "DxLib.h"
 
@@ -26,7 +27,7 @@ public:
 };
 
 GameManager::GameManager() : mNextScene(eNone) {
-	mScene = (BaseScene*) new Title(this);
+	mScene = (BaseScene*) new Game(this);
 }
 
 void GameManager::Initialize() {
@@ -46,7 +47,7 @@ void GameManager::Update() {
 			mScene = (BaseScene*) new Title(this);
 			break;
 		case eGame:
-			//mScene = (BaseScene*) new Game(this);
+			mScene = (BaseScene*) new Game(this);
 			break;
 		case eOption:
 			//mScene = (BaseScene*) new TitleOption(this);
