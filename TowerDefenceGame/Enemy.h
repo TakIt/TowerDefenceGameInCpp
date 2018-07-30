@@ -4,7 +4,7 @@
 #include "DxLib.h"
 
 #include <vector>
-#include <math.h>
+
 
 // for floating point arithmetic error
 #define EPSILON 0.0001
@@ -20,7 +20,7 @@ public:
 		this->angle = 0;
 		this->knockback = 0;
 	}
-	virtual ~EnemyBase() = 0;
+	virtual ~EnemyBase() {}
 
 	virtual void move(std::vector<Vector2D> &vpath) = 0;
 	bool loadTexture(const char *filename);
@@ -33,6 +33,9 @@ public:
 	Vector2D getPosition() const		{ return this->position; }
 	double getAngle() const				{ return this->angle; }
 	double getKnockback()const			{ return this->knockback; }
+
+	// for debug
+	int getCurrentpoint()const { return this->currentpoint; }
 
 	void setHitpoint(double hitpoint)		{ this->hitpoint = hitpoint; }
 	void setMovespeed(double movespeed)		{ this->movespeed = movespeed; }
@@ -55,3 +58,16 @@ protected:
 	int texturehandle;
 };
 
+
+class NormalEnemy : public EnemyBase {
+public:
+	NormalEnemy(double hitpoint, int movespeed, long attackpower, long long resourcereward) : EnemyBase(hitpoint, movespeed, attackpower, resourcereward) {}
+	~NormalEnemy();
+
+	void move(std::vector<Vector2D> &vpath) override;
+
+
+protected:
+
+
+};

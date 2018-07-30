@@ -1,6 +1,7 @@
 #pragma once
 
 #include <math.h>
+#include <float.h>
 
 /// <summary>
 /// Plane coordinates
@@ -26,7 +27,7 @@ public:
 	double getAbsTo(const Vector2D &target) const { return sqrt(pow(this->x - target.x, 2) + pow(this->y - target.y, 2)); }
 	double getAngleTo(const Vector2D &target) const {
 		if (target.x == 0 && target.y == 0) return 0;
-		return atan2(target.y, target.x);
+		return atan2(target.y - this->y, target.x - this->x);
 	}
 
 	Vector2D operator+(const Vector2D &obj) const {
@@ -52,6 +53,14 @@ public:
 	}
 	Vector2D operator/=(const double num) {
 		return Vector2D(this->x /= num, this->y /= num);
+	}
+	bool operator==(const Vector2D &obj) const {
+		if (fabs(this->x - obj.x) < DBL_EPSILON && fabs(this->y - obj.y) < DBL_EPSILON)return true;
+		return false;
+	}
+	bool operator!=(const Vector2D &obj) const {
+		if (fabs(this->x - obj.x) < DBL_EPSILON && fabs(this->y - obj.y) < DBL_EPSILON)return false;
+		return true;
 	}
 
 private:
