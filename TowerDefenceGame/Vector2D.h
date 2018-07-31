@@ -1,7 +1,8 @@
 #pragma once
 
 #include <math.h>
-#include <float.h>
+
+#define EPSILON 0.000001
 
 /// <summary>
 /// Plane coordinates
@@ -55,11 +56,11 @@ public:
 		return Vector2D(this->x /= num, this->y /= num);
 	}
 	bool operator==(const Vector2D &obj) const {
-		if (fabs(this->x - obj.x) < DBL_EPSILON && fabs(this->y - obj.y) < DBL_EPSILON)return true;
+		if (fabs(this->x - obj.x) < EPSILON && fabs(this->y - obj.y) < EPSILON)return true;
 		return false;
 	}
 	bool operator!=(const Vector2D &obj) const {
-		if (fabs(this->x - obj.x) < DBL_EPSILON && fabs(this->y - obj.y) < DBL_EPSILON)return false;
+		if (fabs(this->x - obj.x) < EPSILON && fabs(this->y - obj.y) < EPSILON)return false;
 		return true;
 	}
 

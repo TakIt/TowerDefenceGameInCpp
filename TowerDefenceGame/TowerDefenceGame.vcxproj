@@ -136,6 +136,7 @@
     <ClInclude Include="ISceneChanger.h" />
     <ClInclude Include="Task.h" />
     <ClInclude Include="Terrain.h" />
+    <ClInclude Include="Texture.h" />
     <ClInclude Include="Title.h" />
     <ClInclude Include="Turret.h" />
     <ClInclude Include="TurretBarrel.h" />

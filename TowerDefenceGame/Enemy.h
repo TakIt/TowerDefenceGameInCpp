@@ -5,13 +5,9 @@
 
 #include <vector>
 
-
-// for floating point arithmetic error
-#define EPSILON 0.0001
-
 class EnemyBase {
 public:
-	EnemyBase(double hitpoint, int movespeed, long attackpower, long long resourcereward) {
+	EnemyBase(double hitpoint, double movespeed, long attackpower, long long resourcereward) {
 		this->hitpoint = hitpoint;
 		this->movespeed = movespeed;
 		this->attackpower = attackpower;
@@ -61,7 +57,7 @@ protected:
 
 class NormalEnemy : public EnemyBase {
 public:
-	NormalEnemy(double hitpoint, int movespeed, long attackpower, long long resourcereward) : EnemyBase(hitpoint, movespeed, attackpower, resourcereward) {}
+	NormalEnemy(double hitpoint, double movespeed, long attackpower, long long resourcereward) : EnemyBase(hitpoint, movespeed, attackpower, resourcereward) {}
 	~NormalEnemy();
 
 	void move(std::vector<Vector2D> &vpath) override;

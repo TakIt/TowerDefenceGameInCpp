@@ -9,7 +9,8 @@
 
 class TurretBase {
 public:
-	TurretBase(double damage, double firerate, double range) {
+	TurretBase(std::string name, double damage, double firerate, double range) {
+		this->name = name;
 		this->damage = damage;
 		this->firerate = firerate;
 		this->range = range;
@@ -67,7 +68,7 @@ protected:
 /// </summary>
 class BasicTurret : public TurretBase {
 public:
-	BasicTurret(double damage, double firerate, double range) : TurretBase(damage, firerate, range) {}
+	BasicTurret(std::string name, double damage, double firerate, double range) : TurretBase(name, damage, firerate, range) {}
 	~BasicTurret() {}
 
 	void attack(std::vector<EnemyBase> &targetlist) override;
@@ -82,7 +83,7 @@ protected:
 /// </summary>
 class MortarTurret : public TurretBase {
 public:
-	MortarTurret(double damage, double firerate, double maxrange, double splashdamage, double splashrange, double minrange) : TurretBase(damage, firerate, maxrange) {
+	MortarTurret(std::string name, double damage, double firerate, double maxrange, double splashdamage, double splashrange, double minrange) : TurretBase(name, damage, firerate, maxrange) {
 		this->splashdamage = splashdamage;
 		this->splashrange = splashrange;
 		this->minrange = minrange;
@@ -102,7 +103,7 @@ protected:
 /// </summary>
 class BlastTurret : public TurretBase {
 public:
-	BlastTurret(double damage, double firerate, double range) : TurretBase(damage, firerate, range) {
+	BlastTurret(std::string name, double damage, double firerate, double range) : TurretBase(name, damage, firerate, range) {
 		
 	}
 	~BlastTurret() {}
@@ -118,7 +119,7 @@ protected:
 /// </summary>
 class DotTurret : public TurretBase {
 public:
-	DotTurret(double damage, double firerate, double range, double effectvalue) : TurretBase(damage, firerate, range) {
+	DotTurret(std::string name, double damage, double firerate, double range, double effectvalue) : TurretBase(name, damage, firerate, range) {
 		this->effectvalue = effectvalue;
 	}
 

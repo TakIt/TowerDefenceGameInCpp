@@ -16,8 +16,6 @@ void NormalEnemy::move(std::vector<Vector2D> &vpath) {
 	Vector2D nextpos;
 	double nextangle;
 
-	
-
 	// taken knockback
 	while (this->knockback > EPSILON) {
 		nextangle = this->getPosition().getAngleTo(vpath[currentpoint]);
@@ -49,20 +47,26 @@ void NormalEnemy::move(std::vector<Vector2D> &vpath) {
 
 	// move forward
 	while (movecount > EPSILON) {
-		if (currentpoint != vpath.size())this->setAngle(this->getPosition().getAngleTo(vpath[currentpoint + 1]));
+		if (currentpoint != vpath.size()-1) {
+			this->setAngle(this->getPosition().getAngleTo(vpath[currentpoint + 1]));
+		}
+		// if the position will over the base
+		else {
+			// take damage for base
+			
+			// reset position to start
+			this->position = vpath[0];
+			currentpoint = 0;
+
+			break;
+		}
 
 		nextpos.setX(this->position.getX() + movecount * cos(this->angle));
 		nextpos.setY(this->position.getY() + movecount * sin(this->angle));
 		nextangle = nextpos.getAngleTo(vpath[currentpoint + 1]);
 
-		// if the position will over the start position
-		if (currentpoint == vpath.size() - 1 && fabs((this->position.getAngleTo(vpath[currentpoint + 1]) - nextangle)) > EPSILON) {
-			// take damage to base
-			//write
-		}
-
 		// if the angle to the target is different before and after the movement 
-		if (this->angle != nextangle && this->position != vpath[0]) {
+		if (fabs(this->angle - nextangle) > EPSILON && this->position != vpath[0]) {
 			movecount -= this->position.getAbsTo(vpath[currentpoint + 1]);
 			this->position = vpath[currentpoint + 1];
 			currentpoint++;
