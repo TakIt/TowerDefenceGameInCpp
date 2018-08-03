@@ -25,6 +25,7 @@ private:
 	std::vector<TurretBase*> vturret;
 	std::vector<EnemyBase*> venemy;
 	std::vector<Vector2D> vpath;
+	std::vector<std::vector<TerrainBase*>> vterrain;
 	
 	Texture *texture;
 

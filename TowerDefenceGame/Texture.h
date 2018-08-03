@@ -22,11 +22,14 @@ public:
 		return true;
 	}
 	int getHandle(const std::string filename) {
+		try {
+			dictionary.at(filename);
+		} catch (std::out_of_range &oor) {
+			return -1;
+		}
 		return dictionary[filename];
 	}
 	
 private:
 	std::map<std::string,int> dictionary;
-
-
 };
