@@ -10,8 +10,6 @@ bool EnemyBase::loadTexture(const char *filename) {
 	return true;
 }
 
-NormalEnemy::~NormalEnemy() {}
-
 void NormalEnemy::move(std::vector<Vector2D> &vpath) {
 	Vector2D nextpos;
 	double nextangle;

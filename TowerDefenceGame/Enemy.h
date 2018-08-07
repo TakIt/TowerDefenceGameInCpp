@@ -58,7 +58,7 @@ protected:
 class NormalEnemy : public EnemyBase {
 public:
 	NormalEnemy(double hitpoint, double movespeed, long attackpower, long long resourcereward) : EnemyBase(hitpoint, movespeed, attackpower, resourcereward) {}
-	~NormalEnemy();
+	~NormalEnemy() {}
 
 	void move(std::vector<Vector2D> &vpath) override;
 
