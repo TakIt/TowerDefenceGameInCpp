@@ -11,7 +11,16 @@
 
 #include <vector>
 
+// for DxLib's Color Code
 #define White GetColor(255,255,255)
+#define Black GetColor(0,0,0)
+#define Red GetColor(255,0,0)
+#define Green GetColor(0,255,0)
+#define Blue Getcolor(0,0,255)
+#define Yellow GetColor(255,255,0)
+#define SkyBlue GetColor(0,255,255)
+#define Purple GetColor(255,0,255)
+
 
 class Game : public BaseScene {
 public:
@@ -40,22 +49,53 @@ Game::Game(ISceneChanger *changer) : BaseScene(changer) {
 void Game::Initialize() {
 	// for debug
 	NormalEnemy *normalenemy = new NormalEnemy(20,4,2,10);
-	Vector2D *vec = new Vector2D(0, 364);
+	Vector2D *vec = new Vector2D(80, 408);
 	venemy.push_back(normalenemy);
 	venemy[0]->setPosition(*vec);
 	vpath.push_back(*vec);
-	vec = new Vector2D(32*3, 364);
+	vec = new Vector2D(112 + 64*1, 408);
 	vpath.push_back(*vec);
-	vec = new Vector2D(32*3, 268);
+	vec = new Vector2D(112 + 64*1, 408 - 64*3);
 	vpath.push_back(*vec);
-	vec = new Vector2D(32*8, 268);
+	vec = new Vector2D(112 + 64*3, 408 - 64*3);
 	vpath.push_back(*vec);
-	vec = new Vector2D(32 * 8, 460);
+	vec = new Vector2D(112 + 64*3, 408 + 64*2);
+	vpath.push_back(*vec);
+	vec = new Vector2D(112 + 64*1, 408 + 64*2);
+	vpath.push_back(*vec);
+	vec = new Vector2D(112 + 64*1, 408 + 64*4);
+	vpath.push_back(*vec);
+	vec = new Vector2D(112 + 64*9, 408 + 64*4);
+	vpath.push_back(*vec);
+	vec = new Vector2D(112 + 64*9, 408 + 64*2);
+	vpath.push_back(*vec);
+	vec = new Vector2D(112 + 64*6, 408 + 64*2);
+	vpath.push_back(*vec);
+	vec = new Vector2D(112 + 64*6, 408 - 64*2);
+	vpath.push_back(*vec);
+	vec = new Vector2D(112 + 64 * 5, 408 - 64 * 2);
+	vpath.push_back(*vec);
+	vec = new Vector2D(112 + 64 * 5, 408 - 64 * 4);
+	vpath.push_back(*vec);
+	vec = new Vector2D(112 + 64 * 9, 408 - 64 * 4);
+	vpath.push_back(*vec);
+	vec = new Vector2D(112 + 64 * 9, 408 - 64 * 2);
+	vpath.push_back(*vec);
+	vec = new Vector2D(112 + 64 * 8, 408 - 64 * 2);
+	vpath.push_back(*vec);
+	vec = new Vector2D(112 + 64 * 8, 408 - 64 * 0);
+	vpath.push_back(*vec);
+	vec = new Vector2D(144 + 64 * 10, 408 - 64 * 0);
 	vpath.push_back(*vec);
 }
 
 void Game::Update() {
-	venemy[0]->move(vpath);
+	for (auto i = venemy.begin(); i != venemy.end(); i++) {
+		(*i)->move(vpath);
+	}
+	for (auto i = vturret.begin(); i != vturret.end(); i++) {
+		
+	}
 }
 
 void Game::Draw() {
@@ -86,6 +126,10 @@ void Game::Draw() {
 	DrawString(536, 8, "Health", White);
 	DrawBox(536, 8, 656, 48, White, FALSE);
 
+	// Options
+	DrawString(976, 8, "Opt", White);
+	DrawBox(976, 8, 1016, 48, White, FALSE);
+
 
 	// field
 	DrawString(80, 56, "Field", White);
@@ -96,7 +140,7 @@ void Game::Draw() {
 		}
 	}
 
-	// construction/information menu
+	// turret construction/information menu
 	DrawBox(152 + 10 * Boxsize, 56, 1024 - 8, 768 - 8, White, FALSE);
 	DrawBox(160 + 10 * Boxsize, 64, 1024 - 16, 332, White, FALSE);
 
@@ -108,8 +152,11 @@ void Game::Draw() {
 		}
 	}
 
+	// info
 	DrawString(160 + 10 * Boxsize, 340, "Information", White);
 	DrawBox(160 + 10 * Boxsize, 340, 1024 - 16, 768 - 16, White, FALSE);
+
+	DrawCircle((int)venemy[0]->getPosition().getX(), (int)venemy[0]->getPosition().getY(), 4, White);
 }
 
 void Game::Finalize() {

@@ -133,6 +133,7 @@
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameManager.h" />
+    <ClInclude Include="Loader.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="ISceneChanger.h" />
     <ClInclude Include="Task.h" />
