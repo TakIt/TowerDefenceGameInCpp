@@ -1,0 +1,11 @@
+・Stop/Start,FastForward,NextWave Button
+size = 40*40
+
+・WaveGuage
+size = 48*688
+
+・Field
+size = 64*64 (11*11)
+
+・Turret
+size = 64*64

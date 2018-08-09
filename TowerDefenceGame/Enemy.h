@@ -19,9 +19,9 @@ public:
 	virtual ~EnemyBase() {}
 
 	virtual void move(std::vector<Vector2D> &vpath) = 0;
-	bool loadTexture(const char *filename);
 	bool isAlive() const { return hitpoint > 0; }
-
+	
+	double getDistanceToBase(std::vector<Vector2D> &vpath) const;
 	double getHitpoint() const			{ return this->hitpoint; }
 	double getMovespeed() const			{ return this->movespeed; }
 	long getAttackpower() const			{ return this->attackpower; }
@@ -50,15 +50,13 @@ protected:
 	double angle;
 	int currentpoint;
 	double knockback;
-
-	int texturehandle;
 };
 
 
 class NormalEnemy : public EnemyBase {
 public:
 	NormalEnemy(double hitpoint, double movespeed, long attackpower, long long resourcereward) : EnemyBase(hitpoint, movespeed, attackpower, resourcereward) {}
-	~NormalEnemy();
+	~NormalEnemy() {}
 
 	void move(std::vector<Vector2D> &vpath) override;
 

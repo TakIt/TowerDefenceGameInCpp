@@ -5,12 +5,7 @@
 
 #include <math.h>
 
-bool EnemyBase::loadTexture(const char *filename) {
-	if ((texturehandle = LoadGraph(filename)) == -1)return false;
-	return true;
-}
 
-NormalEnemy::~NormalEnemy() {}
 
 void NormalEnemy::move(std::vector<Vector2D> &vpath) {
 	Vector2D nextpos;
@@ -79,3 +74,9 @@ void NormalEnemy::move(std::vector<Vector2D> &vpath) {
 		}
 	}
 }
+
+
+
+//double EnemyBase::getDistanceToBase(const std::vector<Vector2D> &vpath) const {
+	//for()
+//}
