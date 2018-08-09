@@ -1,9 +1,8 @@
 #pragma once
 
+#include <vector>
 #include "Vector2D.h"
 #include "DxLib.h"
-
-#include <vector>
 
 class EnemyBase {
 public:
