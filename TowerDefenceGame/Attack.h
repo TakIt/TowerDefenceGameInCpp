@@ -3,49 +3,61 @@
 #include"Turret.h"
 #include<vector>
 
-class Attack {
+class TargetPriority {
 public:
-	Attack() {
+	TargetPriority() {
 
 	}
-	~Attack();
-	virtual void decisionOrder(std::vector<EnemyBase> &targetlist,Vector2D position)=0;
-	virtual void decisionOrder(std::vector<EnemyBase> &targetlist) = 0;
+	virtual ~TargetPriority() {};
+	virtual int decisionOrder(std::vector<EnemyBase> &targetlist, TurretBase&)const=0;
+	virtual int decisionOrder(std::vector<EnemyBase> &targetlist)const = 0;
 protected:
-	int targetindex;
 private:
 };
 
 
-class AttackClosestTurret : public Attack {
+class ClosestTurret : public TargetPriority {
 public:
-	void calculatedestance(Vector2D enemyposition, Vector2D turretposition) {
-
-	}
-	void decisionOrder(std::vector<EnemyBase>&targetlist, Vector2D turretposition)override {
-		mindistancefromturret = destance;
-		for (int i=1; i < targetlist.size(); i++) {
-			if(targetlist.at(i)
+	int decisionOrder(std::vector<EnemyBase>&targetlist, TurretBase &turret)const override {
+		if (targetlist.empty())return -1;
+		double mindistancefromturret=DBL_MAX;
+		int targetindex=0;
+		for (int i = 0; i < targetlist.size(); i++) {
+			if (turret.getRange() < turret.getPosition().getAbsTo(targetlist[0].getPosition()))continue;
+			if (turret.getPosition.getAbsTo(targetlist[i].getPosition()) < mindistancefromturret) {
+				mindistancefromturret = turret.getPosition.getAbsTo(targetlist[i].getPosition());
+				targetindex = i;
+			}
 		}
+		return targetindex;
 	}
 private:
-	double mindistancefromturret;
 };
 
 
-class AttackFarthestTurret :public Attack {
+class FarthestTurret :public TargetPriority {
 public:
-	void decisionOrder(std::vector<EnemyBase>&targetlist, Vector2D turretposition)override {
+	int decisionOrder(std::vector<EnemyBase>&targetlist, TurretBase &turret)const override {
+		if (targetlist.empty())return -1;
+		double maxdistancefromturret;
+		int targetindex = 0;
+		for (int i = 0; i < targetlist.size(); i++) {
+			if (turret.getRange() < turret.getPosition().getAbsTo(targetlist[0].getPosition())) continue;
+				if (turret.getPosition.getAbsTo(targetlist[i].getPosition()) > maxdistancefromturret) {
+					maxdistancefromturret = turret.getPosition.getAbsTo(targetlist[i].getPosition());
+					targetindex = i;
+				}
+		}
+		return targetindex;
 
 	}
 private:
-	double maxdistancefromturret;
 };
 
 
-class AttackClosestBase :public Attack {
+class ClosestBase :public TargetPriority {
 public:
-	void decisionOrder(std::vector<EnemyBase>&targetlist, Vector2D baseposition)override {
+	int decisionOrder(std::vector<EnemyBase>&targetlist)const override {
 
 	}
 private:
@@ -53,9 +65,9 @@ private:
 };
 
 
-class AttackFarthestTrret :public Attack {
+class FarthestTrret :public TargetPriority {
 public:
-	void decisionOrder(std::vector<EnemyBase>&targetlist, Vector2D baseposition)override {
+	int decisionOrder(std::vector<EnemyBase>&targetlist)const override {
 
 	}
 private:
@@ -63,9 +75,9 @@ private:
 };
 
 
-class AttackLowestHealth :public Attack {
+class LowestHealth :public TargetPriority {
 public:
-	void decisionOrder(std::vector<EnemyBase>&targetlist)override {
+	int decisionOrder(std::vector<EnemyBase>&targetlist)const override {
 
 	}
 private:
@@ -73,9 +85,9 @@ private:
 };
 
 
-class AttackHighestHealth :public Attack {
+class HighestHealth :public TargetPriority {
 public:
-	void decisionOrder(std::vector<EnemyBase>&targetlist)override {
+	int decisionOrder(std::vector<EnemyBase>&targetlist)const override {
 
 	}
 private:
@@ -83,9 +95,9 @@ private:
 };
 
 
-class AttackRandom :public Attack {
+class Random :public TargetPriority {
 public:
-	void decisionOrder(std::vector<EnemyBase>&targetlist)override {
+	int decisionOrder(std::vector<EnemyBase>&targetlist)const override {
 
 	}
 private:
