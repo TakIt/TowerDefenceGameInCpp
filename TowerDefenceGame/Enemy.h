@@ -19,10 +19,9 @@ public:
 	virtual ~EnemyBase() {}
 
 	virtual void move(std::vector<Vector2D> &vpath) = 0;
-	bool loadTexture(const char *filename);
 	bool isAlive() const { return hitpoint > 0; }
-	bool isReachedBase(std::vector<Vector2D> &vpath) const { return currentpoint == vpath.size()-1; }
-
+	
+	double getDistanceToBase(std::vector<Vector2D> &vpath) const;
 	double getHitpoint() const			{ return this->hitpoint; }
 	double getMovespeed() const			{ return this->movespeed; }
 	long getAttackpower() const			{ return this->attackpower; }
@@ -51,8 +50,6 @@ protected:
 	double angle;
 	int currentpoint;
 	double knockback;
-
-	int texturehandle;
 };
 
 

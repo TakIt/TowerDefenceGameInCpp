@@ -48,7 +48,7 @@ Game::Game(ISceneChanger *changer) : BaseScene(changer) {
 
 void Game::Initialize() {
 	// for debug
-	NormalEnemy *normalenemy = new NormalEnemy(20,4,2,10);
+	NormalEnemy *normalenemy = new NormalEnemy(20,8,2,10);
 	Vector2D *vec = new Vector2D(80, 408);
 	venemy.push_back(normalenemy);
 	venemy[0]->setPosition(*vec);
@@ -142,7 +142,7 @@ void Game::Draw() {
 
 	// turret construction/information menu
 	DrawBox(152 + 10 * Boxsize, 56, 1024 - 8, 768 - 8, White, FALSE);
-	DrawBox(160 + 10 * Boxsize, 64, 1024 - 16, 332, White, FALSE);
+	DrawBox(160 + 10 * Boxsize, 64, 1024 - 16, 348 - 16, White, FALSE);
 
 	// turrets
 	DrawString(160 + 10 * Boxsize, 64, "Turret", White);

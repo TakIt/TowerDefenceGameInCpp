@@ -10,6 +10,7 @@ public:
 	Button(int x, int y) {
 		this->x = x;
 		this->y = y;
+		wasclicked = false;
 		isclicked = false;
 	}
 	~Button() {}
