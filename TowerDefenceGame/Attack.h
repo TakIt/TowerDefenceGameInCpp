@@ -2,6 +2,7 @@
 #include"Enemy.h"
 #include"Turret.h"
 class TurretBase;
+class MortarTurret;
 class TargetPriority {
 public:
 	TargetPriority() {
@@ -9,6 +10,7 @@ public:
 	}
 	virtual ~TargetPriority() {}
 	virtual int decisionOrder(std::vector<EnemyBase> &targetlist, TurretBase &turret)const=0;
+	virtual int decisionOrder(std::vector<EnemyBase> &targetlist, MortarTurret &turret)const=0;
 };
 
 class ClosestTurret : public TargetPriority {
@@ -16,89 +18,83 @@ public:
 	ClosestTurret() {
 
 	}
-	int decisionOrder(std::vector<EnemyBase> &targetlist, TurretBase &turret)const override;/* {
-		if (targetlist.empty())return -1;
-		double mindistancefromturret=DBL_MAX;
-		int targetindex=0;
-		for (int i = 0; i < targetlist.size(); i++) {
-			if (turret.getRange() < turret.getPosition().getAbsTo(targetlist[0].getPosition()))continue;
-			if (turret.getPosition().getAbsTo(targetlist[i].getPosition()) < mindistancefromturret) {
-				mindistancefromturret = turret.getPosition().getAbsTo(targetlist[i].getPosition());
-				targetindex = i;
-			}
-		}
-		return targetindex;
-	}*/
+	int decisionOrder(std::vector<EnemyBase> &targetlist, TurretBase &turret)const override;
 private:
 };
 
 
 class FarthestTurret :public TargetPriority {
 public:
-	int decisionOrder(std::vector<EnemyBase>&targetlist, TurretBase &turret)const override;/* {
-		if (targetlist.empty())return -1;
-		double maxdistancefromturret;
-		int targetindex = 0;
-		for (int i = 0; i < targetlist.size(); i++) {
-			if (turret.getRange() < turret.getPosition().getAbsTo(targetlist[0].getPosition())) continue;
-				if (turret.getPosition().getAbsTo(targetlist[i].getPosition()) > maxdistancefromturret) {
-					maxdistancefromturret = turret.getPosition().getAbsTo(targetlist[i].getPosition());
-					targetindex = i;
-				}
-		}
-		return targetindex;
-	}*/
+	FarthestTurret() {
+
+	}
+	int decisionOrder(std::vector<EnemyBase>&targetlist, TurretBase &turret)const override;
 private:
 };
 
 
 class ClosestBase :public TargetPriority {
 public:
-	int decisionOrder(std::vector<EnemyBase>&targetlist,TurretBase &turret)const override {
-
-	}
+	int decisionOrder(std::vector<EnemyBase>&targetlist, TurretBase &turret)const override;
 private:
-	double mindistancefrombase;
 };
 
 
-class FarthestTrret :public TargetPriority {
+class FarthestBase :public TargetPriority {
 public:
-	int decisionOrder(std::vector<EnemyBase>&targetlist, TurretBase &turret)const override {
-
-	}
+	int decisionOrder(std::vector<EnemyBase>&targetlist, TurretBase &turret)const override;
 private:
-	double maxdistancefrombase;
 };
 
 
 class LowestHealth :public TargetPriority {
 public:
-	int decisionOrder(std::vector<EnemyBase>&targetlist, TurretBase &turret)const override {
-
-	}
+	int decisionOrder(std::vector<EnemyBase>&targetlist, TurretBase &turret)const override;
 private:
-	int minhitpoint;
 };
 
 
 class HighestHealth :public TargetPriority {
 public:
-	int decisionOrder(std::vector<EnemyBase>&targetlist, TurretBase &turret)const override {
-
-	}
+	int decisionOrder(std::vector<EnemyBase>&targetlist, TurretBase &turret)const override;
 private:
-	int maxhitpoint;
 };
 
 
 class Random :public TargetPriority {
 public:
-	int decisionOrder(std::vector<EnemyBase>&targetlist, TurretBase &turret)const override {
-
-	}
+	int decisionOrder(std::vector<EnemyBase>&targetlist, TurretBase &turret)const override;
 private:
 };
 
-
+class ClosestTurretRing :public TargetPriority{
+public:
+	int decisionOrder(std::vector<EnemyBase>&targetlist, MortarTurret &turret)const override;
+};
+class FarthestTurretRing :public TargetPriority {
+public:
+	int decisionOrder(std::vector<EnemyBase>&targetlist, MortarTurret &turret)const override;
+};
+class ClosestBaseRing :public TargetPriority {
+public:
+	int decisionOrder(std::vector<EnemyBase>&targetlist, MortarTurret &turret)const override;
+};
+class FarthestBaseRing :public TargetPriority {
+public:
+	int decisionOrder(std::vector<EnemyBase>&targetlist, MortarTurret &turret)const override;
+};
+class LowestHealthRing :public TargetPriority {
+public:
+	int decisionOrder(std::vector<EnemyBase>&targetlist, MortarTurret &turret)const override;
+};
+class HighestHealthRing :public TargetPriority {
+public:
+	int decisionOrder(std::vector<EnemyBase>&targetlist, MortarTurret &turret)const override;
+private:
+};
+class RandomRing :public TargetPriority {
+public:
+	int decisionOrder(std::vector<EnemyBase>&targetlist, MortarTurret &turret)const override;
+private:
+};
 //ゲーム自体にコンストラクタを呼ぶ関数があると想定。

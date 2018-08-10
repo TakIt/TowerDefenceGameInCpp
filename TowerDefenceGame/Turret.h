@@ -21,7 +21,7 @@ public:
 	virtual ~TurretBase() = 0;
 
 	virtual void attack(std::vector<EnemyBase> &targetlist) = 0;
-	virtual void construct() = 0;
+	virtual TurretBase* construct() = 0;
 	bool canConstruct(long long resource);
 	virtual void upgrade() = 0;
 	bool canUpgrade(long long resource);
@@ -63,10 +63,16 @@ protected:
 /// </summary>
 class BasicTurret : public TurretBase {
 public:
-	BasicTurret(std::string name, double damage, double firerate, double range) : TurretBase(name, damage, firerate, range) {}
+	BasicTurret(std::string name, double damage, double firerate, double range,int constructcost,int upgradecost) : TurretBase(name, damage, firerate, range) {
+		this->constructcost = constructcost;
+		this->upgradecost = upgradecost;
+	}
 	~BasicTurret() {}
 
 	void attack(std::vector<EnemyBase> &targetlist) override;
+	BasicTurret* construct()override;
+	void upgrade()override;
+	void destroy()override;
 
 
 protected:
@@ -86,6 +92,9 @@ public:
 	~MortarTurret() {}
 
 	void attack(std::vector<EnemyBase> &targetlist) override;
+	double getMinRange() { return this->minrange; }
+	double getSplashDamage() { return this->splashdamage; }
+	double getSplashRange() { return this->splashrange; }
 
 protected:
 	double splashdamage;
