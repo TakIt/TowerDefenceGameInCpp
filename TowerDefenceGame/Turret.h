@@ -21,7 +21,7 @@ public:
 	virtual ~TurretBase() = 0;
 
 	virtual void attack(std::vector<EnemyBase> &targetlist) = 0;
-	virtual TurretBase* construct() = 0;
+	virtual void construct() = 0;
 	bool canConstruct(long long resource);
 	virtual void upgrade() = 0;
 	bool canUpgrade(long long resource);
@@ -70,7 +70,7 @@ public:
 	~BasicTurret() {}
 
 	void attack(std::vector<EnemyBase> &targetlist) override;
-	BasicTurret* construct()override;
+	void construct()override;
 	void upgrade()override;
 	void destroy()override;
 

@@ -20,19 +20,14 @@ void BasicTurret::attack(std::vector<EnemyBase> &targetlist) {
 	// take damage
 	targetlist[targetindex].setHitpoint(targetlist[targetindex].getHitpoint() - this->damage);
 
-}
-BasicTurret* BasicTurret::construct() {
-	//if (true) {
-	//	return new BasicTurret("basic", 100.0, 100.0, 100.0,100,100);
-	//}
-	return nullptr;
-}
-void BasicTurret::upgrade() {
-	/*if (true) {
-
-	}*/
+}//これいるか？建設時に発動するエフェクトを設定する？
+void BasicTurret::construct() {
 	return;
 }
+//アップグレードとその際のエフェクトを担う。
+void BasicTurret::upgrade() {
+}
+//破棄される瞬間のエフェクトを設定する？
 void BasicTurret::destroy() {
 	
 }
