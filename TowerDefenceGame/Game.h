@@ -8,6 +8,8 @@
 #include "Terrain.h"
 
 #include "Texture.h"
+#include "Button.h"
+#include "Mouse.h"
 
 #include <vector>
 
@@ -33,17 +35,24 @@ public:
 	void Finalize() override;
 
 private:
+	Mouse mouse;
+
 	std::vector<TurretBase*> vturret;
 	std::vector<EnemyBase*> venemy;
 	std::vector<Vector2D> vpath;
 	std::vector<std::vector<TerrainBase*>> vterrain;
 	
-	Texture *texture;
+	Texture texture;
 
+	std::vector<Button*> button;
+
+	bool isPaused;
+	bool isFFed;
 };
 
 Game::Game(ISceneChanger *changer) : BaseScene(changer) {
-
+	this->isPaused = false;
+	this->isFFed = false;
 }
 
 void Game::Initialize() {
@@ -87,20 +96,57 @@ void Game::Initialize() {
 	vpath.push_back(*vec);
 	vec = new Vector2D(144 + 64 * 10, 408 - 64 * 0);
 	vpath.push_back(*vec);
+
+	texture.pool("texture/Game/Buttons/Stop.png");
+	texture.pool("texture/Game/Buttons/Start.png");
+	texture.pool("texture/Game/Buttons/NotFastForward.png");
+	texture.pool("texture/Game/Buttons/FastForward.png");
+
+	std::vector<std::string> *vfilename = new std::vector<std::string>();
+	vfilename->push_back("texture/Game/Buttons/Stop.png");
+	vfilename->push_back("texture/Game/Buttons/Start.png");
+	button.push_back(new Button(8, 8));
+	button[0]->init(&texture, *vfilename);
+
+	
+	vfilename->clear();
+	vfilename->push_back("texture/Game/Buttons/NotFastForward.png");
+	vfilename->push_back("texture/Game/Buttons/FastForward.png");
+	button.push_back(new Button(56, 8));
+	button[1]->init(&texture, *vfilename);
 }
 
 void Game::Update() {
+	this->mouse.update();
+	for (auto i = button.begin(); i != button.end(); i++) {
+		(*i)->update(this->mouse);
+	}
+	if (button[0]->isClicked()) {
+		isPaused ? isPaused = false : isPaused = true;
+	}
+	if (button[1]->isClicked()) {
+		isFFed ? isFFed = false : isFFed = true;
+	}
+	
+	
+	if (isPaused) return;
 	for (auto i = venemy.begin(); i != venemy.end(); i++) {
 		(*i)->move(vpath);
+		if(isFFed)(*i)->move(vpath);
 	}
 	for (auto i = vturret.begin(); i != vturret.end(); i++) {
-		
+
 	}
+
+
 }
 
 void Game::Draw() {
 	DrawFormatString(0, 0, GetColor(255, 255, 255), "ƒQ[ƒ€");
 
+	for (auto i = button.begin(); i != button.end(); i++) {
+		(*i)->draw();
+	}
 	
 	// Stop/Start
 	DrawString(8, 8, "S/S", White);
