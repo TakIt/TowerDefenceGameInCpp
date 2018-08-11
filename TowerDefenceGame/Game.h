@@ -101,6 +101,9 @@ void Game::Initialize() {
 	texture.pool("texture/Game/Buttons/Start.png");
 	texture.pool("texture/Game/Buttons/NotFastForward.png");
 	texture.pool("texture/Game/Buttons/FastForward.png");
+	texture.pool("texture/Game/Buttons/NextWave.png");
+	texture.pool("texture/Game/Turrets/TurretBases/default.png");
+	texture.pool("texture/Game/Turrets/TurretBases/default(selected).png");
 
 	std::vector<std::string> *vfilename = new std::vector<std::string>();
 	vfilename->push_back("texture/Game/Buttons/Stop.png");
@@ -114,6 +117,19 @@ void Game::Initialize() {
 	vfilename->push_back("texture/Game/Buttons/FastForward.png");
 	button.push_back(new Button(56, 8));
 	button[1]->init(&texture, *vfilename);
+
+	vfilename->clear();
+	vfilename->push_back("texture/Game/Buttons/NextWave.png");
+	button.push_back(new Button(104, 8));
+	button[2]->init(&texture, *vfilename);
+
+	vfilename->clear();
+	vfilename->push_back("texture/Game/Turrets/TurretBases/default.png");
+	vfilename->push_back("texture/Game/Turrets/TurretBases/default(selected).png");
+	for (int i = 0; i < 3; i++)for (int j = 0; j < 3; j++) {
+		button.push_back(new Button(808 + j * 64, 132 + i * 64));
+	}
+	for(int i = 0;i<9;i++)button[3 + i]->init(&texture, *vfilename);
 }
 
 void Game::Update() {
@@ -126,6 +142,14 @@ void Game::Update() {
 	}
 	if (button[1]->isClicked()) {
 		isFFed ? isFFed = false : isFFed = true;
+	}
+	if (button[2]->isClicked()) {
+		// next wave
+	}
+	for (int i = 0; i < 9; i++) {
+		if (button[3 + i]->isClicked()) {
+			printfDx("clicked\n");
+		}
 	}
 	
 	
@@ -206,5 +230,7 @@ void Game::Draw() {
 }
 
 void Game::Finalize() {
-
+	for (auto i = button.begin(); i != button.end(); i++) {
+		delete (*i);
+	}
 }
