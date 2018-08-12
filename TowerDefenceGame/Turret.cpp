@@ -47,3 +47,11 @@ void MortarTurret::attack(std::vector<EnemyBase> &targetlist) {
 		}
 	}
 }
+
+void BlastTurret::attack(std::vector<EnemyBase> &targetlist) {
+	for (auto i = 0; i < targetlist.size(); i++) {
+		if (this->getRange() > this->getPosition().getAbsTo(targetlist[i].getPosition())) {
+			targetlist[i].setHitpoint(targetlist[i].getHitpoint() - this->getDamage());
+		}
+	}
+}
