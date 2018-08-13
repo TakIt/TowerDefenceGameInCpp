@@ -31,12 +31,14 @@ public:
 	double getDamage() const { return this->damage; }
 	double getFireRate() const { return this->firerate; }
 	double getRange() const { return this->range; }
+	double getWaiting()const { return this->waiting; }
 	Vector2D getPosition() const { return this->position; }
 
 	void setAttackPower(double damage) { this->damage = damage; }
 	void setFireRate(double firerate) { this->firerate = firerate; }
 	void setAttackRange(double range) { this->range = range; }
 	void setTarget(TargetPriority* priority) {this->target = priority;}
+	void setWaiting(double waiting) { this->waiting = waiting; }
 	
 
 
@@ -50,6 +52,7 @@ protected:
 	double damage;
 	double firerate;
 	double range;
+	double waiting;
 	Vector2D position;
 	TurretBarrel turretbarrel;
 	TargetPriority* target;
