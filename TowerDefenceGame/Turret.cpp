@@ -20,16 +20,25 @@ void BasicTurret::attack(std::vector<EnemyBase> &targetlist) {
 	// take damage
 	targetlist[targetindex].setHitpoint(targetlist[targetindex].getHitpoint() - this->damage);
 
-}//これいるか？建設時に発動するエフェクトを設定する？
+}
+//グレードを1に設定
 void BasicTurret::construct() {
+	setGrade(1);
+	setCostSpent(getCostSpent());
 	return;
 }
-//アップグレードとその際のエフェクトを担う。
+//レンジ・グレード・ダメージを増加
 void BasicTurret::upgrade() {
+	setRange(getRange()*1.1);
+	setGrade(getGrade() + 1);
+	setDamage(getDamage()*1.5);
+	setCostSpent(getCostSpent() + getUpgradeCost());
+	setUpgradeCost((int)round(getUpgradeCost()*1.5));
+	return;
 }
-//破棄される瞬間のエフェクトを設定する？
-void BasicTurret::destroy() {
-	
+//費やしたコストに応じてコストを返還
+int BasicTurret::destroy() {
+	return (int)round(getCostSpent()*0.7);
 }
 
 void MortarTurret::attack(std::vector<EnemyBase> &targetlist) {
@@ -47,6 +56,24 @@ void MortarTurret::attack(std::vector<EnemyBase> &targetlist) {
 		}
 	}
 }
+void MortarTurret::construct() {
+	setGrade(1);
+	setCostSpent(getCostSpent());
+	return;
+}
+void MortarTurret::upgrade() {
+	setSplashDamage(getSplashDamage()*1.5);
+	setSplashRange(getSplashRange()*1.1);
+	setRange(getRange()*1.1);
+	setGrade(getGrade() + 1);
+	setDamage(getDamage()*1.5);
+	setCostSpent(getCostSpent() + getUpgradeCost());
+	setUpgradeCost((int)round(getUpgradeCost()*1.5));
+	return;
+}
+int MortarTurret::destroy() {
+	return (int)round(getCostSpent()*0.7);
+}
 
 void BlastTurret::attack(std::vector<EnemyBase> &targetlist) {
 	for (auto i = 0; i < targetlist.size(); i++) {
@@ -54,4 +81,20 @@ void BlastTurret::attack(std::vector<EnemyBase> &targetlist) {
 			targetlist[i].setHitpoint(targetlist[i].getHitpoint() - this->getDamage());
 		}
 	}
+}
+void BlastTurret::construct() {
+	setGrade(1);
+	setCostSpent(getCostSpent());
+	return;
+}
+void BlastTurret::upgrade() {
+	setRange(getRange()*1.1);
+	setGrade(getGrade() + 1);
+	setDamage(getDamage()*1.5);
+	setCostSpent(getCostSpent() + getUpgradeCost());
+	setUpgradeCost((int)round(getUpgradeCost()*1.5));
+	return;
+}
+int BlastTurret::destroy() {
+	return (int)round(getCostSpent()*0.7);
 }

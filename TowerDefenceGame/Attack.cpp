@@ -1,4 +1,5 @@
 #include"Attack.h"
+#include"DxLib.h"
 
 int ClosestTurret::decisionOrder(std::vector<EnemyBase> &targetlist, TurretBase &turret)const{
 	if (turret.getFireRate() > turret.getWaiting()) {
@@ -37,9 +38,39 @@ int FarthestTurret::decisionOrder(std::vector<EnemyBase>&targetlist, TurretBase 
 	return targetindex;
 }
 int ClosestBase::decisionOrder(std::vector<EnemyBase>&targetlist, TurretBase &turret)const {
+	//if (turret.getFireRate() > turret.getWaiting()) {
+	//	turret.setWaiting(turret.getWaiting() + 1.0);
+	//	return -1;
+	//}
+	//if (targetlist.empty())return -1;
+	//double mindistancetobase = DBL_MAX;
+	//int targetindex = 0;
+	//for (auto i = 0; i < targetlist.size(); i++) {
+	//	if (turret.getRange() < turret.getPosition().getAbsTo(targetlist[0].getPosition())) continue;
+	//	if (targetlist[i].getDistanceToBase() < mindistancetobase) {
+	//		targetindex = i;
+	//	}
+	//}
+	//return targetindex;
 	return 0;
 }
 int FarthestBase::decisionOrder(std::vector<EnemyBase>&targetlist, TurretBase &turret)const {
+	//if (turret.getFireRate() > turret.getWaiting()) {
+	//	turret.setWaiting(turret.getWaiting() + 1.0);
+	//	return -1;
+	//}
+	//if (targetlist.empty())return -1;
+	//double maxdistancetobase = 0;
+	//int targetindex = 0;
+	//for (auto i = 0; i < targetlist.size(); i++) {
+	//	for (auto i = 0; i < targetlist.size(); i++) {
+	//		if (turret.getRange() < turret.getPosition().getAbsTo(targetlist[0].getPosition())) continue;
+	//		if (targetlist[i].getDistanceToBase() < maxdistancetobase) {
+	//			targetindex = i;
+	//		}
+	//	}
+	//}
+	//return targetindex;
 	return 0;
 }
 int LowestHealth::decisionOrder(std::vector<EnemyBase>&targetlist, TurretBase &turret)const {
@@ -79,7 +110,10 @@ int HighestHealth::decisionOrder(std::vector<EnemyBase>&targetlist, TurretBase &
 	return targetindex;
 }
 int Random::decisionOrder(std::vector<EnemyBase>&targetlist, TurretBase &turret)const {
-	return 0;
+	SRand(0);
+	int targetindex = 0;
+	targetindex = GetRand(targetlist.size());
+	return targetindex;
 }
 
 int ClosestTurretRing::decisionOrder(std::vector<EnemyBase>&targetlist, MortarTurret &turret)const {
@@ -121,9 +155,39 @@ int FarthestTurretRing::decisionOrder(std::vector<EnemyBase>&targetlist, MortarT
 	return targetindex;
 }
 int ClosestBaseRing::decisionOrder(std::vector<EnemyBase>&targetlist, MortarTurret &turret)const {
+	//if (turret.getFireRate() > turret.getWaiting()) {
+	//	turret.setWaiting(turret.getWaiting() + 1.0);
+	//	return -1;
+	//}
+	//if (targetlist.empty())return -1;
+	//double mindistancetobase = DBL_MAX;
+	//int targetindex = 0;
+	//for (auto i = 0; i < targetlist.size(); i++) {
+	//	if (turret.getRange() < turret.getPosition().getAbsTo(targetlist[0].getPosition())) continue;
+	//	if (turret.getMinRange() > turret.getPosition().getAbsTo(targetlist[0].getPosition())) continue;
+	//	if (targetlist[i].getDistanceToBase() < mindistancetobase) {
+	//		targetindex = i;
+	//	}
+	//}
+	//return targetindex;
 	return 0;
 }
 int FarthestBaseRing::decisionOrder(std::vector<EnemyBase>&targetlist, MortarTurret &turret)const {
+	//if (turret.getFireRate() > turret.getWaiting()) {
+	//	turret.setWaiting(turret.getWaiting() + 1.0);
+	//	return -1;
+	//}
+	//if (targetlist.empty())return -1;
+	//double maxdistancetobase = 0;
+	//int targetindex = 0;
+	//for (auto i = 0; i < targetlist.size(); i++) {
+	//	if (turret.getRange() < turret.getPosition().getAbsTo(targetlist[0].getPosition())) continue;
+	//	if (turret.getMinRange() > turret.getPosition().getAbsTo(targetlist[0].getPosition())) continue;
+	//	if (targetlist[i].getDistanceToBase() < maxdistancetobase) {
+	//		targetindex = i;
+	//	}
+	//}
+	//return targetindex;
 	return 0;
 }
 int LowestHealthRing::decisionOrder(std::vector<EnemyBase>&targetlist, MortarTurret &turret)const {
@@ -165,5 +229,8 @@ int HighestHealthRing::decisionOrder(std::vector<EnemyBase>&targetlist, MortarTu
 	return targetindex;
 }
 int RandomRing::decisionOrder(std::vector<EnemyBase>&targetlist, MortarTurret &turret)const {
-	return 0;
+	SRand(0);
+	int targetindex = 0;
+	targetindex = GetRand(targetlist.size());
+	return targetindex;
 }

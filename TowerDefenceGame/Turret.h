@@ -4,6 +4,7 @@
 
 #include <vector>
 #include <string>
+#include<math.h>
 
 #include "Vector2D.h"
 #include "Enemy.h"
@@ -25,13 +26,17 @@ public:
 	bool canConstruct(long long resource);
 	virtual void upgrade() = 0;
 	bool canUpgrade(long long resource);
-	virtual void destroy() = 0;
+	virtual int destroy() = 0;
 
 	std::string getName() const { return this->name; }
 	double getDamage() const { return this->damage; }
 	double getFireRate() const { return this->firerate; }
 	double getRange() const { return this->range; }
 	double getWaiting()const { return this->waiting; }
+	int getGrade()const { return this->grade; }
+	int getConstructCost()const { return this->constructcost; }
+	int getUpgradeCost()const { return this->upgradecost; }
+	int getCostSpent()const { return this->costspent; }
 	Vector2D getPosition() const { return this->position; }
 
 	void setAttackPower(double damage) { this->damage = damage; }
@@ -39,7 +44,11 @@ public:
 	void setAttackRange(double range) { this->range = range; }
 	void setTarget(TargetPriority* priority) {this->target = priority;}
 	void setWaiting(double waiting) { this->waiting = waiting; }
-	
+	void setGrade(int grade) { this->grade = grade; }
+	void setDamage(double damage) { this->damage = damage; }
+	void setCostSpent(int coatspent) { this->costspent = costspent; }
+	void setUpgradeCost(int upgradecost) { this->upgradecost = upgradecost; }
+	void setRange(double range) { this->range = range; }
 
 
 
@@ -49,6 +58,7 @@ protected:
 	int constructcost;
 	int upgradecost;
 	int costspent;
+	int grade;
 	double damage;
 	double firerate;
 	double range;
@@ -75,7 +85,7 @@ public:
 	void attack(std::vector<EnemyBase> &targetlist) override;
 	void construct()override;
 	void upgrade()override;
-	void destroy()override;
+	int destroy()override;
 
 
 protected:
@@ -93,11 +103,16 @@ public:
 		this->minrange = minrange;
 	}
 	~MortarTurret() {}
-
+	void construct()override;
+	void upgrade()override;
+	int destroy()override;
 	void attack(std::vector<EnemyBase> &targetlist) override;
 	double getMinRange() { return this->minrange; }
 	double getSplashDamage() { return this->splashdamage; }
 	double getSplashRange() { return this->splashrange; }
+	void setSplashDamage(double splashdamage) {this->splashdamage=splashdamage; }
+	void setSplashRange(double splashrange) { this->splashrange = splashrange; }
+	void setMinRange(double minrange) { this->minrange = minrange; }
 
 protected:
 	double splashdamage;
@@ -114,7 +129,9 @@ public:
 		
 	}
 	~BlastTurret() {}
-
+	void construct()override;
+	void upgrade()override;
+	int destroy()override;
 	void attack(std::vector<EnemyBase> &targetlist) override;
 
 protected:
