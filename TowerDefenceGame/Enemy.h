@@ -2,7 +2,6 @@
 
 #include <vector>
 #include "Vector2D.h"
-#include "DxLib.h"
 
 class EnemyBase {
 public:
@@ -20,7 +19,7 @@ public:
 	virtual void move(std::vector<Vector2D> &vpath) = 0;
 	bool isAlive() const { return hitpoint > 0; }
 	
-	double getDistanceToBase(std::vector<Vector2D> &vpath) const;
+	double getDistanceToBase(const std::vector<Vector2D> &vpath) const;
 	double getHitpoint() const			{ return this->hitpoint; }
 	double getMovespeed() const			{ return this->movespeed; }
 	long getAttackpower() const			{ return this->attackpower; }
@@ -31,6 +30,7 @@ public:
 
 	// for debug
 	int getCurrentpoint()const { return this->currentpoint; }
+
 
 	void setHitpoint(double hitpoint)		{ this->hitpoint = hitpoint; }
 	void setMovespeed(double movespeed)		{ this->movespeed = movespeed; }

@@ -101,6 +101,8 @@ void Game::Update() {
 void Game::Draw() {
 	DrawFormatString(0, 0, GetColor(255, 255, 255), "ƒQ[ƒ€");
 
+	DrawFormatString(0, 40, White, "%lf", venemy[0]->getDistanceToBase(vpath));
+
 	
 	// Stop/Start
 	DrawString(8, 8, "S/S", White);
