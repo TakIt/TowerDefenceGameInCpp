@@ -133,6 +133,7 @@
   <ItemGroup>
     <ClCompile Include="Attack.cpp" />
     <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="Mouse.cpp" />
     <ClCompile Include="Terrain.cpp" />
     <ClCompile Include="TowerDefenceGame.cpp" />
     <ClCompile Include="Turret.cpp" />
@@ -144,6 +145,7 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="Loader.h" />
+    <ClInclude Include="Mouse.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="ISceneChanger.h" />
     <ClInclude Include="Task.h" />
