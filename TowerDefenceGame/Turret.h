@@ -13,16 +13,20 @@
 class TargetPriority;
 class TurretBase {
 public:
-	TurretBase(std::string name, double damage, double firerate, double range) {
+	TurretBase(std::string name, double damage, double firerate, double range,int constructcost,int upgradecost, Vector2D position) {
 		this->name = name;
 		this->damage = damage;
 		this->firerate = firerate;
 		this->range = range;
+		this->grade = 1;
+		this->constructcost = constructcost;
+		this->upgradecost = upgradecost;
+		this->costspent = constructcost;
+		this->position = position;
 	}
 	virtual ~TurretBase() = 0;
 
 	virtual void attack(std::vector<EnemyBase> &targetlist) = 0;
-	virtual void construct() = 0;
 	bool canConstruct(long long resource);
 	virtual void upgrade() = 0;
 	bool canUpgrade(long long resource);
@@ -76,20 +80,18 @@ protected:
 /// </summary>
 class BasicTurret : public TurretBase {
 public:
-	BasicTurret(std::string name, double damage, double firerate, double range,int constructcost,int upgradecost) : TurretBase(name, damage, firerate, range) {
+	BasicTurret(std::string name, double damage, double firerate, double range,int constructcost,int upgradecost,Vector2D position) : TurretBase(name, damage, firerate, range,constructcost,upgradecost,position) {
 		this->constructcost = constructcost;
 		this->upgradecost = upgradecost;
 	}
 	~BasicTurret() {}
-
+	void changePriority(TargetPriority* target);
 	void attack(std::vector<EnemyBase> &targetlist) override;
-	void construct()override;
 	void upgrade()override;
 	int destroy()override;
 
 
 protected:
-
 };
 
 /// <summary>
@@ -97,13 +99,13 @@ protected:
 /// </summary>
 class MortarTurret : public TurretBase {
 public:
-	MortarTurret(std::string name, double damage, double firerate, double maxrange, double splashdamage, double splashrange, double minrange) : TurretBase(name, damage, firerate, maxrange) {
+	MortarTurret(std::string name, double damage, double firerate, double maxrange,int constructcost,int upgradecost,Vector2D position, double splashdamage, double splashrange, double minrange) : TurretBase(name, damage, firerate, maxrange, constructcost, upgradecost,position) {
 		this->splashdamage = splashdamage;
 		this->splashrange = splashrange;
 		this->minrange = minrange;
 	}
 	~MortarTurret() {}
-	void construct()override;
+	void changePriority(TargetPriority* target);
 	void upgrade()override;
 	int destroy()override;
 	void attack(std::vector<EnemyBase> &targetlist) override;
@@ -125,11 +127,10 @@ protected:
 /// </summary>
 class BlastTurret : public TurretBase {
 public:
-	BlastTurret(std::string name, double damage, double firerate, double range) : TurretBase(name, damage, firerate, range) {
+	BlastTurret(std::string name, double damage, double firerate, double range, int constructcost, int upgradecost,Vector2D position) : TurretBase(name, damage, firerate, range, constructcost, upgradecost,position) {
 		
 	}
 	~BlastTurret() {}
-	void construct()override;
 	void upgrade()override;
 	int destroy()override;
 	void attack(std::vector<EnemyBase> &targetlist) override;
@@ -143,7 +144,7 @@ protected:
 /// </summary>
 class DotTurret : public TurretBase {
 public:
-	DotTurret(std::string name, double damage, double firerate, double range, double effectvalue) : TurretBase(name, damage, firerate, range) {
+	DotTurret(std::string name, double damage, double firerate, double range, int constructcost, int upgradecost,Vector2D position, double effectvalue) : TurretBase(name, damage, firerate, range, constructcost, upgradecost,position) {
 		this->effectvalue = effectvalue;
 	}
 

@@ -2,6 +2,7 @@
 //#include <vector>
 #include "Turret.h"
 
+
 bool TurretBase::canConstruct(long long resource) {
 	return resource >= constructcost;
 }
@@ -21,11 +22,9 @@ void BasicTurret::attack(std::vector<EnemyBase> &targetlist) {
 	targetlist[targetindex].setHitpoint(targetlist[targetindex].getHitpoint() - this->damage);
 
 }
-//グレードを1に設定
-void BasicTurret::construct() {
-	setGrade(1);
-	setCostSpent(getCostSpent());
-	return;
+void BasicTurret::changePriority(TargetPriority* target) {
+	delete this->target;
+	this->target = target;
 }
 //レンジ・グレード・ダメージを増加
 void BasicTurret::upgrade() {
@@ -56,10 +55,9 @@ void MortarTurret::attack(std::vector<EnemyBase> &targetlist) {
 		}
 	}
 }
-void MortarTurret::construct() {
-	setGrade(1);
-	setCostSpent(getCostSpent());
-	return;
+void MortarTurret::changePriority(TargetPriority* target) {
+	delete this->target;
+	this->target = target;
 }
 void MortarTurret::upgrade() {
 	setSplashDamage(getSplashDamage()*1.5);
@@ -81,11 +79,6 @@ void BlastTurret::attack(std::vector<EnemyBase> &targetlist) {
 			targetlist[i].setHitpoint(targetlist[i].getHitpoint() - this->getDamage());
 		}
 	}
-}
-void BlastTurret::construct() {
-	setGrade(1);
-	setCostSpent(getCostSpent());
-	return;
 }
 void BlastTurret::upgrade() {
 	setRange(getRange()*1.1);
